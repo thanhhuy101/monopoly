@@ -75,42 +75,13 @@ const storeCreator: StateCreator<GameStore> = (set, get) => ({
   },
 
   pause() {
-    const { phase } = get();
-    if (phase === 'paused' || phase === 'gameover') return;
-    clearGameTimers();
-    // If walking, stop the player animation and save remaining info
-    if (phase === 'walking') {
-      const info = get()._walkInfo;
-      if (info) {
-        get()._mutPlayer(info.playerId, () => ({ isWalking: false }));
-      }
-    }
-    set({ pausedFrom: phase, phase: 'paused' });
-    get()._log('⏸ Ván đấu đã tạm dừng');
+    // Pause functionality removed
   },
 
   resume() {
-    const { pausedFrom, _walkInfo } = get();
-    if (!pausedFrom) return;
-    get()._log('▶ Ván đấu tiếp tục');
-
-    if (pausedFrom === 'rolling') {
-      // Re-trigger the roll
-      set({ pausedFrom: null, phase: 'rolling', _walkInfo: null });
-      gameTimeout(() => {
-        const v1 = Math.ceil(Math.random() * 6);
-        const v2 = Math.ceil(Math.random() * 6);
-        set({ dice: [v1, v2] });
-        get()._processRoll(v1, v2);
-      }, 550);
-    } else if (pausedFrom === 'walking' && _walkInfo) {
-      // Continue walking remaining steps
-      set({ pausedFrom: null, phase: 'walking', _walkInfo: null });
-      get()._walkPlayer(_walkInfo.playerId, _walkInfo.stepsLeft);
-    } else {
-      set({ phase: pausedFrom, pausedFrom: null, _walkInfo: null });
-    }
+    // Resume functionality removed
   },
+
 
   dismissCardReveal() {
     const reveal = get().cardReveal;
@@ -208,8 +179,6 @@ const storeCreator: StateCreator<GameStore> = (set, get) => ({
     get()._mutPlayer(playerId, () => ({ isWalking: true }));
 
     const step = (remaining: number): void => {
-      // Check if paused before each step
-      if (get().phase === 'paused') return;
 
       if (remaining === 0) {
         set({ _walkInfo: null });
@@ -218,7 +187,7 @@ const storeCreator: StateCreator<GameStore> = (set, get) => ({
         return;
       }
 
-      // Update remaining steps for pause tracking
+      // Update remaining steps for tracking
       set({ _walkInfo: { playerId, stepsLeft: remaining } });
 
       get()._mutPlayer(playerId, p => {
@@ -486,7 +455,7 @@ const storeCreator: StateCreator<GameStore> = (set, get) => ({
   },
 
   openBankruptcyFlow() {
-    set({ bankruptcyFlow: true, phase: 'paused' });
+    set({ bankruptcyFlow: true });
     get()._log('⚠️ Người chơi không đủ tiền trả nợ - Mở quy trình phá sản');
   },
 

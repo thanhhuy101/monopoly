@@ -155,17 +155,12 @@ const createApiGameStore: StateCreator<ApiGameStore> = (set, get) => ({
     }
   },
 
-
   pause() {
-    const { phase } = get();
-    if (phase === 'paused' || phase === 'gameover') return;
-    set({ pausedFrom: phase, phase: 'paused' });
+    // Pause functionality removed
   },
 
   resume() {
-    const { pausedFrom } = get();
-    if (!pausedFrom) return;
-    set({ phase: pausedFrom, pausedFrom: null });
+    // Resume functionality removed  
   },
 
   roll() {
@@ -383,9 +378,6 @@ const createApiGameStore: StateCreator<ApiGameStore> = (set, get) => ({
     get()._mutPlayer(playerId, () => ({ isWalking: true }));
 
     const step = (remaining: number): void => {
-      // Check if paused before each step
-      if (get().phase === 'paused') return;
-
       if (remaining === 0) {
         set({ _walkInfo: null });
         get()._mutPlayer(playerId, () => ({ isWalking: false }));
@@ -393,7 +385,7 @@ const createApiGameStore: StateCreator<ApiGameStore> = (set, get) => ({
         return;
       }
 
-      // Update remaining steps for pause tracking
+      // Update remaining steps for tracking
       set({ _walkInfo: { playerId, stepsLeft: remaining } });
 
       get()._mutPlayer(playerId, p => {

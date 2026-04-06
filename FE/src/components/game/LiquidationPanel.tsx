@@ -466,7 +466,7 @@ export default function LiquidationPanel({
               )}
               <button
                 onClick={onConfirm}
-                className="px-10 py-3 bg-gradient-to-r from-[#f6be39] to-[#d4a017] text-[#261a00] font-['Barlow_Condensed'] font-bold uppercase tracking-widest shadow-[0_4px_15px_rgba(212,160,23,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer border-0"
+                className="px-10 py-3 bg-linear-to-r from-[#f6be39] to-[#d4a017] text-[#261a00] font-['Barlow_Condensed'] font-bold uppercase tracking-widest shadow-[0_4px_15px_rgba(212,160,23,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer border-0"
               >
                 Xác Nhận Thanh Khoản
               </button>

@@ -250,8 +250,6 @@ export interface GameState {
 export interface GameActions {
   init: (setup?: PlayerSetup[]) => void;
   roll: () => void;
-  pause: () => void;
-  resume: () => void;
   handleModalAction: (action: ModalButton) => void;
   dismissCardReveal: () => void;
   // internal (prefixed _) — still exported so store methods can call each other

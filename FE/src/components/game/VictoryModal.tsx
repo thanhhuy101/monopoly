@@ -77,7 +77,7 @@ const VictoryModal: React.FC<VictoryModalProps> = ({
         <div className="flex flex-col md:flex-row gap-4 w-full max-w-lg">
           <button
             onClick={onPlayAgain}
-            className="flex-1 bg-gradient-to-br from-primary to-primary-container py-4 px-8 flex items-center justify-center gap-3 active:scale-95 transition-transform cursor-pointer"
+            className="flex-1 bg-linear-to-br from-primary to-primary-container py-4 px-8 flex items-center justify-center gap-3 active:scale-95 transition-transform cursor-pointer"
           >
             <span className="material-symbols-outlined text-black font-bold">celebration</span>
             <span className="font-label text-lg font-extrabold text-black uppercase tracking-tighter">Chơi Lại</span>
